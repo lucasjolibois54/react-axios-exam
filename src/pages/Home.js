@@ -38,25 +38,6 @@ function Home() {
         }
       };
     
-      const updateItem = async (id, updatedTitle) => {
-        try {
-          await axios.put(`https://jsonplaceholder.typicode.com/posts/${id}`, {
-            title: updatedTitle,
-            body: 'Lorem ipsum dolor sit amet.',
-            userId: 1,
-          });
-          const updatedData = data.map((item) => {
-            if (item.id === id) {
-              return { ...item, title: updatedTitle };
-            }
-            return item;
-          });
-          setData(updatedData);
-        } catch (error) {
-          console.error('Error updating item:', error);
-        }
-      };
-    
       const deleteItem = async (id) => {
         try {
           await axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`);
@@ -68,32 +49,53 @@ function Home() {
       };
     
       return (
-        <div>
-          <div>
-            <input
-              type="text"
-              value={newItem}
-              onChange={(e) => setNewItem(e.target.value)}
-              placeholder="Enter a new item"
-            />
-            <button onClick={addNewItem}>Add Item</button>
-          </div>
-    
-          {loading ? (
-            <p>Loading data...</p>
-          ) : (
-            <ul>
-              {data.map((item) => (
-                <li key={item.id}>
-                  {item.title}
-                  {item.body}
-                  <button onClick={() => updateItem(item.id, `${item.title} (Updated)`)}>Update</button>
-                  <button onClick={() => deleteItem(item.id)}>Delete</button>
-                </li>
-              ))}
-            </ul>
-          )}
+<div className="max-w-6xl mx-auto px-5">
+  <div className="space-y-4">
+  <h1 className="text-3xl lg:text-5xl text-center font-bold mt-16 mb-16">React Axios</h1>
+    <div className="flex mb-10">
+      <input
+        className="border rounded-l py-2 px-4 w-full"
+        type="text"
+        value={newItem}
+        onChange={(e) => setNewItem(e.target.value)}
+        placeholder="Enter a new item"
+      />
+      <button
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r"
+        onClick={addNewItem}
+      >
+        Add Item
+      </button>
+    </div>
+
+    {loading ? (
+      <p>Loading data...</p>
+    ) : (
+      <ul>
+        {data.map((item) => (
+          <li
+            key={item.id}
+            className="flex items-center justify-between py-2 border-b"
+          >
+        <div className='flex flex-col'>
+        <p className="font-bold">{item.title}</p>
+        <p className='w-5/6'>{item.body}</p>
         </div>
+            <div className="">
+              <button
+                className="text-red-500 hover:text-red-700"
+                onClick={() => deleteItem(item.id)}
+              >
+                Delete
+              </button>
+            </div>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+</div>
+
       );
     };
     
