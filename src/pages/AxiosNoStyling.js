@@ -1,6 +1,5 @@
-import React from 'react'
-import axios, { Axios } from 'axios'
-import {useState, useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
+import axios from 'axios'
 
 const baseURL = "https://jsonplaceholder.typicode.com/posts";
 
