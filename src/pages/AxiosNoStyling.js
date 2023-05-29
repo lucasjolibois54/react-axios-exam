@@ -37,24 +37,6 @@ function AxiosNoStyling() {
         }
       };
     
-      const updateItem = async (id, updatedTitle) => {
-        try {
-          await axios.put(`https://jsonplaceholder.typicode.com/posts/${id}`, {
-            title: updatedTitle,
-            body: 'Lorem ipsum dolor sit amet.',
-            userId: 1,
-          });
-          const updatedData = data.map((item) => {
-            if (item.id === id) {
-              return { ...item, title: updatedTitle };
-            }
-            return item;
-          });
-          setData(updatedData);
-        } catch (error) {
-          console.error('Error updating item:', error);
-        }
-      };
     
       const deleteItem = async (id) => {
         try {
@@ -86,7 +68,6 @@ function AxiosNoStyling() {
                 <li key={item.id}>
                   {item.title}
                   {item.body}
-                  <button onClick={() => updateItem(item.id, `${item.title} (Updated)`)}>Update</button>
                   <button onClick={() => deleteItem(item.id)}>Delete</button>
                 </li>
               ))}
