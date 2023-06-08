@@ -31,7 +31,7 @@ function Home() {
             body: 'Lorem ipsum dolor sit amet.',
             userId: 1,
           });
-          setData([...data, response.data]);
+          setData([response.data, ...data]);
           setNewItem('');
         } catch (error) {
           console.error('Error adding new item:', error);
